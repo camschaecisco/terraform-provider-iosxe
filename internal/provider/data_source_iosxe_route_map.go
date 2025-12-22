@@ -473,7 +473,7 @@ func (d *RouteMapDataSource) Schema(ctx context.Context, req datasource.SchemaRe
 							MarkdownDescription: "No community attribute",
 							Computed:            true,
 						},
-						"set_communities": schema.ListAttribute{
+						"set_communities": schema.SetAttribute{
 							MarkdownDescription: "BGP community value - can be a number (AA:NN format) or well-known value (internet, local-AS, no-advertise, no-export, gshut)",
 							ElementType:         types.StringType,
 							Computed:            true,

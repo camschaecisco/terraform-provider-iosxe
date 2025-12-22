@@ -142,7 +142,7 @@ type RouteMapEntries struct {
 	SetAsPathReplaceAny                    types.Bool                          `tfsdk:"set_as_path_replace_any"`
 	SetAsPathReplaceAs                     []RouteMapEntriesSetAsPathReplaceAs `tfsdk:"set_as_path_replace_as"`
 	SetCommunityNone                       types.Bool                          `tfsdk:"set_community_none"`
-	SetCommunities                         types.List                          `tfsdk:"set_communities"`
+	SetCommunities                         types.Set                           `tfsdk:"set_communities"`
 	SetCommunitiesAdditive                 types.Bool                          `tfsdk:"set_communities_additive"`
 	SetCommunityListDelete                 types.Bool                          `tfsdk:"set_community_list_delete"`
 	SetCommunityListStandard               types.Int64                         `tfsdk:"set_community_list_standard"`
@@ -1258,9 +1258,9 @@ func (data *RouteMap) updateFromBody(ctx context.Context, res gjson.Result) {
 			data.Entries[i].SetCommunityNone = types.BoolNull()
 		}
 		if value := r.Get("set.Cisco-IOS-XE-bgp:bgp-route-map-set.bgp-community.community-well-known.community-list"); value.Exists() && !data.Entries[i].SetCommunities.IsNull() {
-			data.Entries[i].SetCommunities = helpers.GetStringList(value.Array())
+			data.Entries[i].SetCommunities = helpers.GetStringSet(value.Array())
 		} else {
-			data.Entries[i].SetCommunities = types.ListNull(types.StringType)
+			data.Entries[i].SetCommunities = types.SetNull(types.StringType)
 		}
 		if value := r.Get("set.Cisco-IOS-XE-bgp:bgp-route-map-set.bgp-community.community-well-known.additive"); !data.Entries[i].SetCommunitiesAdditive.IsNull() {
 			if value.Exists() {
@@ -1738,9 +1738,9 @@ func (data *RouteMap) fromBody(ctx context.Context, res gjson.Result) {
 				item.SetCommunityNone = types.BoolValue(false)
 			}
 			if cValue := v.Get("set.Cisco-IOS-XE-bgp:bgp-route-map-set.bgp-community.community-well-known.community-list"); cValue.Exists() {
-				item.SetCommunities = helpers.GetStringList(cValue.Array())
+				item.SetCommunities = helpers.GetStringSet(cValue.Array())
 			} else {
-				item.SetCommunities = types.ListNull(types.StringType)
+				item.SetCommunities = types.SetNull(types.StringType)
 			}
 			if cValue := v.Get("set.Cisco-IOS-XE-bgp:bgp-route-map-set.bgp-community.community-well-known.additive"); cValue.Exists() {
 				item.SetCommunitiesAdditive = types.BoolValue(true)
@@ -2195,9 +2195,9 @@ func (data *RouteMapData) fromBody(ctx context.Context, res gjson.Result) {
 				item.SetCommunityNone = types.BoolValue(false)
 			}
 			if cValue := v.Get("set.Cisco-IOS-XE-bgp:bgp-route-map-set.bgp-community.community-well-known.community-list"); cValue.Exists() {
-				item.SetCommunities = helpers.GetStringList(cValue.Array())
+				item.SetCommunities = helpers.GetStringSet(cValue.Array())
 			} else {
-				item.SetCommunities = types.ListNull(types.StringType)
+				item.SetCommunities = types.SetNull(types.StringType)
 			}
 			if cValue := v.Get("set.Cisco-IOS-XE-bgp:bgp-route-map-set.bgp-community.community-well-known.additive"); cValue.Exists() {
 				item.SetCommunitiesAdditive = types.BoolValue(true)

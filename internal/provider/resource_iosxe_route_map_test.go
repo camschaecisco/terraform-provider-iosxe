@@ -143,7 +143,6 @@ func TestAccIosxeRouteMap(t *testing.T) {
 	}
 	checks = append(checks, resource.TestCheckResourceAttr("iosxe_route_map.test", "entries.0.set_as_path_prepend_as", "65001 65001"))
 	checks = append(checks, resource.TestCheckResourceAttr("iosxe_route_map.test", "entries.0.set_as_path_prepend_last_as", "5"))
-	checks = append(checks, resource.TestCheckResourceAttr("iosxe_route_map.test", "entries.0.set_communities.0", "no-export"))
 	if os.Getenv("IOSXE1712") != "" {
 		checks = append(checks, resource.TestCheckResourceAttr("iosxe_route_map.test", "entries.0.set_community_list_name", "COMML1"))
 	}

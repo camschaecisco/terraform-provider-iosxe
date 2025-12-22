@@ -564,7 +564,7 @@ func (r *RouteMapResource) Schema(ctx context.Context, req resource.SchemaReques
 							MarkdownDescription: helpers.NewAttributeDescription("No community attribute").String,
 							Optional:            true,
 						},
-						"set_communities": schema.ListAttribute{
+						"set_communities": schema.SetAttribute{
 							MarkdownDescription: helpers.NewAttributeDescription("BGP community value - can be a number (AA:NN format) or well-known value (internet, local-AS, no-advertise, no-export, gshut)").String,
 							ElementType:         types.StringType,
 							Optional:            true,
